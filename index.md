@@ -1,6 +1,31 @@
 # Lawyers on GitHub
 
-A club full of lawyers who also have GitHub accounts. 
+<script data-server-js="true">
+
+function people() {
+
+// get the list of MD files
+var f = currentFile.value().fileInfo().file().openOrThrowException("js");
+f = new java.io.File(f.getParentFile(), "_lawyers");
+
+
+var folks = f.listFiles().
+  filter(function(tf)
+    {return tf.isFile() && tf.getName().endsWith(".md");}).
+  map(function(tf)
+    {return fileParser.load(tf);}).
+    filter(function(x) {return null != x;}).
+  map(function(v) {
+  return {html: v.html(),
+          data: help.toJs(v.meta())};
+    });
+
+return folks;
+}
+
+</script>
+
+A club full of lawyers who also have GitHub accounts.
 
 Proving this diagram wrong since 2009:
 
@@ -8,6 +33,18 @@ Proving this diagram wrong since 2009:
 
 All you have to do to join is create a [pull request](https://github.com/dpp/lawyersongithub) with
 information about your bar membership.
+
+<div data-js="people()">
+<hr>
+<span data-js="* *+ #> it.data.name">Name: </span>
+<a href="https://github.com/" data-js="* [href+] #>it.data.github"><span data-js="* *+ #> it.data.github">GitHub: </span></a>
+<span data-js="* #> it.html">Name: </span>
+
+<ul data-js="it.data.links">
+  <li data-js="a * #> it[0]"><a href="#" data-js="a [href] #> it[1]"></a></li>
+</ul>
+
+</div>
 
 Here are the members:
 
@@ -227,7 +264,7 @@ Member of the Georgia Bar.
 
 ## [Ansel Halliburton](https://github.com/anseljh)
 
-Member of the California Bar. IP litigator at Computerlaw Group. 
+Member of the California Bar. IP litigator at Computerlaw Group.
 
 [Personal Website](http://anseljh.com/about/)
 
@@ -365,8 +402,8 @@ Solicitor and Member of Law Society of Ireland.
 
 ## [Joseph Mornin](https://github.com/morninj)
 
-Law student at Berkeley. Currently a legal intern at EFF; worked previously at 
-the Berkman Center for Internet & Society, the Center for Democracy & 
+Law student at Berkeley. Currently a legal intern at EFF; worked previously at
+the Berkman Center for Internet & Society, the Center for Democracy &
 Technology, and elsewhere.
 
 [@morninj](https://www.twitter.com/morninj)
